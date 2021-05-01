@@ -4,24 +4,24 @@ from django.db import models
 
 
 class PlayerData(models.Model):
-    specific_id = models.CharField(max_length=15)
-    ranking = models.CharField(max_length=15)
+    specific_id = models.IntegerField()
+    ranking = models.IntegerField()
     player_image = models.URLField()
-    name = models.CharField(max_length=15)
-    position = models.CharField(max_length=40)
+    name = models.CharField(max_length=225)
+    position = models.CharField(max_length=225)
     age = models.CharField(max_length=10)
     nation_image = models.URLField()
-    nation = models.CharField(max_length=25)
+    nation = models.CharField(max_length=225)
     team_image = models.URLField()
-    team = models.CharField(max_length=25)
-    value = models.CharField(max_length=15)
+    team = models.CharField(max_length=225)
+    value = models.CharField(max_length=225)
 
 
 class ClubData(models.Model):
-    specific_id = models.CharField(max_length=15,default="")
-    ranking = models.CharField(max_length=15)
+    specific_id = models.IntegerField()
+    ranking = models.IntegerField()
     club_image = models.URLField()
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=225)
     Competition_image = models.URLField()
-    Competition = models.CharField(max_length=25)
-    club_value = models.CharField(max_length=15)
+    Competition = models.CharField(max_length=255)
+    club_value = models.FloatField()
