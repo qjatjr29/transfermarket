@@ -1,0 +1,30 @@
+.playerValue{
+    display: grid;
+    height: 270px;
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: 10%;
+    overflow-x: auto;
+}
+p{
+    font-size: 15px;
+}
+
+.Container{
+    font-size:12px;
+}
+.imageContainer{
+    margin-bottom: 5px;
+    position: relative;
+}
+.img{
+    background-image:url(bgUrl);
+    height: 180px;
+    background-size: cover;
+    border-radius: 4px;
+    background-position: center center;
+    margin-bottom: 5px;
+    transition: opacity 0.1s linear;
+}

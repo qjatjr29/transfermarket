@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+# from rest_framework import routers
+# from crawled_data import views
+
+# router=routes.DefaultRouter()
+# router.register('playerValue',views.PlayerValueView,'playerValue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('player_value',include('player_value.urls')),
-    # path('club_value',include('club_value.urls')),
-    path('',include('crawled_data.urls')),
+    path('api/',include('crawled_data.urls')),
+    # path('',include('crawled_data.urls')),
+    # path('playerValue',include(router.urls)),
 ]

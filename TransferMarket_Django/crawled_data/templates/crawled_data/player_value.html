@@ -1,4 +1,6 @@
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 
 
 <div>
@@ -6,20 +8,24 @@
 </div>
 
 {% for player in players %}
-    <div>
-
-        <p>Ranking: {{player.ranking}}</p>
+    <div class="playerValue">
+        <div class="Container">
+            <div class="imageContainer">
+                <div class="img" bgUrl="{{player.player_image}}"></div>
+                <span class="ranking">{{player.ranking}}</span>
+                <span class="name">{{player.name}}</span>
+                <span class="value">{{player.value}}</span>
+            </div> 
+        </div> 
+        <!-- <p>Ranking: {{player.ranking}}</p>
         <p>Name: {{player.name}}</p>
         <p>Value: {{player.value}}</p>
         <p>img_link: {{player.player_image}}</p>
         <p>Position: {{player.position}}</p>
         <p>Age: {{player.age}}</p>
         <p>Nation: {{player.nation}}</p>
-        <p>Club: {{player.team}}</p>
-
+        <p>Club: {{player.team}}</p> -->
     </div>
-    <p> "\n</p>
-    <p>"\n" </p>
 {% endfor %}
 
 <!-- specific_id = models.CharField(max_length=15)
