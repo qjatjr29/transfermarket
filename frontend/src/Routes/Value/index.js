@@ -18,6 +18,9 @@ const Content = styled.div`
     z-index:1;
     height:100%;
 `;
+const Item = styled.div`
+    margin-bottom:30px;
+`;
 
 
 const Divider = styled.span`
@@ -59,9 +62,26 @@ const useValue = () => {
             let res = await fetch('http://127.0.0.1:8000/playerValue/');
             const playerValues = await res.json();
             setPlayerValues(playerValues);
+
             res = await fetch('http://127.0.0.1:8000/forwardValue/');
             const fowardValues = await res.json();
             setFowardValues(fowardValues);
+
+            res = await fetch('http://127.0.0.1:8000/clubValue/')
+            const clubValues = await res.json();
+            setClubValues(clubValues);
+
+            res = await fetch('http://127.0.0.1:8000/midfieldValue/')
+            const midfielderValues = await res.json();
+            setMidfielderValues(midfielderValues);
+
+            res = await fetch('http://127.0.0.1:8000/defenderValue/')
+            const defenderValues = await res.json();
+            setDefenderValues(defenderValues);
+
+            res = await fetch('http://127.0.0.1:8000/goalKeeperValue/')
+            const goalkeeperValues = await res.json();
+            setGoalkeeperValues(goalkeeperValues);
 
         } catch (e) {
             console.log(e);
@@ -72,11 +92,11 @@ const useValue = () => {
     useEffect(() => {
         loadValue();
     }, []);
-    return { loading, playerValues, fowardValues };
+    return { loading, playerValues, clubValues, fowardValues, midfielderValues, defenderValues, goalkeeperValues };
 }
 
 const Value = () => {
-    const { loading, playerValues, fowardValues } = useValue();
+    const { loading, playerValues, clubValues, fowardValues, midfielderValues, defenderValues, goalkeeperValues } = useValue();
     // console.log(playerValues);
     // console.log(playerValues[0].player_image);
     return (
@@ -93,7 +113,7 @@ const Value = () => {
                 </Helmet>
                 <Content>
                     {playerValues && playerValues.length > 0 && (
-                        <div>
+                        <Item>
                             <SectionTitle>Most Valuable Players</SectionTitle>
                             <SectionHr></SectionHr>
                             <ValueContent>
@@ -102,27 +122,112 @@ const Value = () => {
                                         key={player.specific_id}
                                         ranking={player.ranking}
                                         name={player.name}
-                                        player_image={player.player_image}
+                                        image={player.player_image}
                                         team={player.team}
                                         value={player.value}
                                         team_image={player.team_image}
                                     />
                                 ))}
                             </ValueContent>
-
-                        </div>
+                        </Item>
+                    )}
+                    {clubValues && clubValues.length > 0 && (
+                        <Item>
+                            <SectionTitle>Most Valuable Club</SectionTitle>
+                            <SectionHr></SectionHr>
+                            <ValueContent>
+                                {clubValues.map(club => (
+                                    <ValueSection
+                                        key={club.specific_id}
+                                        ranking={club.ranking}
+                                        name={club.name}
+                                        image={club.club_image}
+                                        Competition={club.Competition}
+                                        value={club.club_value}
+                                    // team_image={player.team_image}
+                                    />
+                                ))}
+                            </ValueContent>
+                        </Item>
+                    )}
+                    {fowardValues && fowardValues.length > 0 && (
+                        <Item>
+                            <SectionTitle>Most Valuable Forward</SectionTitle>
+                            <SectionHr></SectionHr>
+                            <ValueContent>
+                                {fowardValues.map(player => (
+                                    <ValueSection
+                                        key={player.specific_id}
+                                        ranking={player.ranking}
+                                        name={player.name}
+                                        image={player.player_image}
+                                        team={player.team}
+                                        value={player.value}
+                                        team_image={player.team_image}
+                                    />
+                                ))}
+                            </ValueContent>
+                        </Item>
+                    )}
+                    {midfielderValues && midfielderValues.length > 0 && (
+                        <Item>
+                            <SectionTitle>Most Valuable MidFielders</SectionTitle>
+                            <SectionHr></SectionHr>
+                            <ValueContent>
+                                {midfielderValues.map(player => (
+                                    <ValueSection
+                                        key={player.specific_id}
+                                        ranking={player.ranking}
+                                        name={player.name}
+                                        image={player.player_image}
+                                        team={player.team}
+                                        value={player.value}
+                                    // team_image={player.team_image}
+                                    />
+                                ))}
+                            </ValueContent>
+                        </Item>
+                    )}
+                    {defenderValues && defenderValues.length > 0 && (
+                        <Item>
+                            <SectionTitle>Most Valuable Defenders</SectionTitle>
+                            <SectionHr></SectionHr>
+                            <ValueContent>
+                                {defenderValues.map(player => (
+                                    <ValueSection
+                                        key={player.specific_id}
+                                        ranking={player.ranking}
+                                        name={player.name}
+                                        image={player.player_image}
+                                        team={player.team}
+                                        value={player.value}
+                                    // team_image={player.team_image}
+                                    />
+                                ))}
+                            </ValueContent>
+                        </Item>
+                    )}
+                    {goalkeeperValues && goalkeeperValues.length > 0 && (
+                        <Item>
+                            <SectionTitle>Most Valuable GoalKeepers</SectionTitle>
+                            <SectionHr></SectionHr>
+                            <ValueContent>
+                                {goalkeeperValues.map(player => (
+                                    <ValueSection
+                                        key={player.specific_id}
+                                        ranking={player.ranking}
+                                        name={player.name}
+                                        image={player.player_image}
+                                        team={player.team}
+                                        value={player.value}
+                                    // team_image={player.team_image}
+                                    />
+                                ))}
+                            </ValueContent>
+                        </Item>
                     )}
                 </Content>
-                < div >
-                    {
-                        fowardValues.map(player => (
-                            <div key={player.ranking}>
-                                <h3>{player.name}</h3>
-                                <span>{player.value}</span>
-                            </div>
-                        ))
-                    }
-                </div >
+
             </Container>
 
         ));

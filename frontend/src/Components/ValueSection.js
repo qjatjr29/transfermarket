@@ -49,22 +49,26 @@ const Ranking = styled.span`
     align-items:center;
     margin-bottom:3px;
 `;
+const Value = styled.span`
+    display:block;
+    margin-top:2px;
+    font-size:13px;
+`;
 
 
 
-const ValueSection = ({ ranking, player_image, name, value, team }) => (
+const ValueSection = ({ ranking, image, name, value, team, Competition }) => (
     // <Link to={isMovie ? `/movie/${id}` : `/show/${id} `}>
     <Container>
         <ImageContainer>
-            <Image_ src={player_image} />
-
-            {/* <Image src={player_image} /> */}
-            {/* <Image bgUrl={player_image ? { player_image } : require("../assets/NotFound.PNG").default} /> */}
-            {/* <Image bgUrl={player_image} /> */}
+            {image && (<Image_ src={image} />)}
+            {/* {club_image && (<Image_ src={club_image} />)} */}
             <div>
                 <Ranking>{ranking} </Ranking>
                 <Name>{name.length > 15 ? `${name.substring(0, 15)}...` : name}</Name>
-                <Team>{team.length > 15 ? `${team.substring(0, 15)}...` : team}</Team>
+                <Value>{value}</Value>
+                {team && (<Team>{team.length > 15 ? `${team.substring(0, 15)}...` : team}</Team>)}
+                {Competition && <Team>{Competition}</Team>}
             </div>
 
         </ImageContainer >
@@ -77,7 +81,7 @@ const ValueSection = ({ ranking, player_image, name, value, team }) => (
 
 ValueSection.propTypes = {
     ranking: PropTypes.number.isRequired,
-    player_image: PropTypes.string,
+    image: PropTypes.string,
     name: PropTypes.string.isRequired,
     team: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
