@@ -23,7 +23,17 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',include('crawled_data.urls')),
+    path('playerValue/',include('crawled_data.playerValue')),
+    path('forwardValue/',include('crawled_data.forwardValue')),
+    path('clubValue/',include('crawled_data.clubValue')),
+    path('midfieldValue/',include('crawled_data.midfieldValue')),
+    path('defenderValue/',include('crawled_data.defenderValue')),
+    path('goalKeeperValue/',include('crawled_data.goalKeeperValue')),
+    path('premierPlayer/',include('crawled_data.PremierPlayer')),
+    path('laligaPlayer/',include('crawled_data.LaligaPlayer')),
+    path('bundesligaPlayer/',include('crawled_data.BundesligaPlayer')),
+    path('serieAPlayer/',include('crawled_data.SerieAPlayer')),
+    path('ligue1Player/',include('crawled_data.Ligue1Player')),
     # path('',include('crawled_data.urls')),
     # path('playerValue',include(router.urls)),
 ]

@@ -28,12 +28,8 @@ def extractInfo(info):
     name = club[2].find("a").text
     Competition_image = club[3].find("img")['src']
     Competition = club[3].find("a")['title']
-    club_value = club[4].find("b").text[1:-1]
-    if club_value[-1] == 'b':
-        club_value = club_value[:-1]
-        club_value = float(club_value)*13*1000
-    else:
-        club_value = float(club_value)*13
+    club_value = club[4].find("b").text
+    
   
     return{
         "specific_id":specific_id,
