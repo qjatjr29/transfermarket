@@ -43,12 +43,27 @@ export default withRouter(({ location: { pathname } }) => (
             <Item current={pathname === "/Value"}>
                 <SLink to="/Value">Value</SLink>
             </Item>
-            <Item current={pathname === "/clubValue"}>
-                <SLink to="/clubValue">valuable clubs</SLink>
+            <Item current={pathname === "/Stats"}>
+                <SLink to="/clubStats">Stats</SLink>
             </Item>
             <Item current={pathname === "/Search"}>
                 <SLink to="/Search">Search</SLink>
             </Item>
+            {/* <Item current={pathname === "/premierPStats"}>
+                <SLink to="/premierPStats">premierPStats</SLink>
+            </Item>
+            <Item current={pathname === "/LaLigaPStats"}>
+                <SLink to="/LaLigaPStats">premierPStats</SLink>
+            </Item>
+            <Item current={pathname === "/bundesLigaPStats"}>
+                <SLink to="/bundesLigaPStats">bundesLigaPStats</SLink>
+            </Item>
+            <Item current={pathname === "/serieAPStats"}>
+                <SLink to="/serieAPStats">serieAPStats</SLink>
+            </Item>
+            <Item current={pathname === "/Ligue1PStats"}>
+                <SLink to="/Ligue1PStats">Ligue1PStats</SLink>
+            </Item> */}
         </List>
     </Header>
 ));
