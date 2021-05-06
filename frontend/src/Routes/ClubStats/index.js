@@ -1,292 +1,252 @@
-// import React, { Component, useState, useEffect } from 'react';
-// import styled from "styled-components";
-// import Helmet from "react-helmet";
-// import Loader from "Components/Loader";
-// import ValueSection from 'Components/ValueSection';
+import React, { Component, useState, useEffect } from 'react';
+import styled from "styled-components";
+import Helmet from "react-helmet";
+import Loader from "Components/Loader";
+import ClubStatSection from 'Components/clubStatSection';
+import PremierImg from '../../assets/premierLeague.PNG';
+import LaLigaImg from '../../assets/laLiga.PNG';
+import BundesLigaImg from '../../assets/bundesLiga.PNG';
+import SerieAImg from '../../assets/serieA.PNG';
+import Ligue1Img from '../../assets/ligue1.PNG';
+import { Link } from "react-router-dom"
 
-// const Container = styled.div`
-//     height:calc(100vh - 50px);
-//     width:100%;
+const Container = styled.div`
+    height:calc(100vh - 50px);
+    width:100%;
 
-//     padding:50px;
-// `;
-// const Content = styled.div`
-//     display:flex;
-//     flex-direction:column;
-//     width:100%;
-//     position:relative;
-//     z-index:1;
-//     height:100%;
-// `;
-// const Item = styled.div`
-//     margin-bottom:30px;
-// `;
+    padding:50px;
+`;
+const Content = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    position:relative;
+    z-index:1;
+    height:100%;
+`;
+const Item = styled.div`
+    margin-bottom:30px;
+`;
 
 
-// const Divider = styled.span`
-//     font-size:25px;
-//     margin:0 10px;
-// `;
-// const DivideDiv = styled.div`
-//     height:20px;    
-// `;
-// const SectionTitle = styled.span`
-//     margin-top:20px;
-//     font-size:23px;
-//     font-weight:600;
-// `;
-// const LigueImage = styled.img`
-//     height:80px;
-//     width:80px;
-//     border-radius:5px;
-// `;
-// const SectionHr = styled.hr`
-//     margin-top:15px;
-// `;
-// const ValueContent = styled.div`
-//     height: 150px;
-//     display: grid;
-//     gap: 5px;
-//     align-items: center;
-//     grid-auto-flow: column;
-//     grid-auto-columns: 8%;
-//     overflow-x: auto;
-// `;
+const Divider = styled.span`
+    font-size:25px;
+    margin:0 10px;
+`;
+const LeagueDiv = styled.div`
+    height: 70px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    /* justify-content:space-between; */
+    /* grid-auto-flow: column;
+    grid-auto-columns: 8%;
+    overflow-x: auto;     */
+    margin-bottom:30px;
+`;
 
-// const useValue = () => {
-//     const [loading, setLoading] = useState(true);
-//     const [premierPlayers, setpremierPlayers] = useState([]);
-//     const [laligaPlayers, setlaligaPlayers] = useState([]);
-//     const [bundesligaPlayers, setbundesligaPlayers] = useState([]);
-//     const [serieAPlayers, setserieAPlayers] = useState([]);
-//     const [ligue1Players, setligue1Players] = useState([]);
-//     // const [clubValues, setClubValues] = useState([]);
-//     const loadValue = async () => {
-//         setLoading(true);
+const SectionTitle = styled.span`
+    margin-top:20px;
+    font-size:23px;
+    font-weight:600;
+`;
+const LigueImage = styled.img`
+    height:50px;
+    width:50px;
+    border-radius:5px;
+`;
+const SectionHr = styled.hr`
+    margin-top:15px;
+`;
+const ValueContent = styled.div`
+    height: 150px;
+    display: grid;
+    gap: 5px;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: 8%;
+    overflow-x: auto;
+`;
+
+const SLink = styled(Link)`
+`;
+const Table = styled.table`
+    width:800px;
+    border-spacing:30px;
+    border-collapse: separate;
+`;
+const useValue = () => {
+    const [loading, setLoading] = useState(true);
+    const [premierClubs, setpremierClubs] = useState([]);
+    const [laligaClubs, setlaligaClubs] = useState([]);
+    const [bundesligaClubs, setbundesligaClubs] = useState([]);
+    const [serieAClubs, setserieAClubs] = useState([]);
+    const [ligue1Clubs, setligue1Clubs] = useState([]);
+    // const [clubValues, setClubValues] = useState([]);
+    const loadValue = async () => {
+        setLoading(true);
+        try {
+
+            let res = await fetch('http://127.0.0.1:8000/premierClub/');
+            const premierClubs = await res.json();
+            setpremierClubs(premierClubs);
+
+            res = await fetch('http://127.0.0.1:8000/laligaClub/');
+            const laligaClubs = await res.json();
+            setlaligaClubs(laligaClubs);
+
+            res = await fetch('http://127.0.0.1:8000/bundesligaClub/')
+            const bundesligaClubs = await res.json();
+            setbundesligaClubs(bundesligaClubs);
+
+            res = await fetch('http://127.0.0.1:8000/serieAClub/')
+            const serieAClubs = await res.json();
+            setserieAClubs(serieAClubs);
+
+            res = await fetch('http://127.0.0.1:8000/ligue1Club/')
+            const ligue1Clubs = await res.json();
+            setligue1Clubs(ligue1Clubs);
+
+            // res = await fetch('http://127.0.0.1:8000/ligue1Player/')
+            // const goalkeeperValues = await res.json();
+            // setGoalkeeperValues(goalkeeperValues);
+
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        loadValue();
+    }, []);
+    return { loading, premierClubs, laligaClubs, bundesligaClubs, serieAClubs, ligue1Clubs };
+}
+
+const Value = () => {
+    const { loading, premierClubs, laligaClubs, bundesligaClubs, serieAClubs, ligue1Clubs } = useValue();
+    // console.log(playerValues);
+    // console.log(playerValues[0].player_image);
+    return (
+        loading ? (
+            <Loader>
+                <Helmet>
+                    <title>5 Ligue Clubs Stats</title>
+                </Helmet>
+            </Loader>
+        ) : (
+            <Container>
+                <Helmet>
+                    <title>5 Ligue Clubs Stats</title>
+                </Helmet>
+                <Content>
+
+
+                    {premierClubs && premierClubs.length > 0 && (
+                        <>
+                            <LeagueDiv>
+                                <SLink to="/premierPStats"><LigueImage src={PremierImg} /></SLink>
+                                <SLink to="/LaLigaPStats"><LigueImage src={LaLigaImg} /></SLink>
+                                <SLink to="/bundesLigaPStats"><LigueImage src={BundesLigaImg} /></SLink>
+                                <SLink to="/serieAPStats"><LigueImage src={SerieAImg} /></SLink>
+                                <SLink to="/Ligue1PStats"><LigueImage src={Ligue1Img} /></SLink>
+                            </LeagueDiv>
+                            <Item>
+                                <SLink to="/premierPStats"><SectionTitle>Premier League</SectionTitle></SLink>
+                                <SectionHr></SectionHr>
+                                <Table>
+                                    <thead>
+                                        <tr>
+                                            <td>Ranking</td>
+                                            <td>Club</td>
+                                            <td>P</td>
+                                            <td>W</td>
+                                            <td>D</td>
+                                            <td>L</td>
+                                            <td>GF</td>
+                                            <td>GA</td>
+                                            <td>GD</td>
+                                            <td>Pts</td>
+                                            <td>State</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {premierClubs.map(clubs => (
+                                            <ClubStatSection
+                                                key={clubs.specific_id}
+                                                ranking={clubs.ranking}
+                                                name={clubs.name}
+                                                play={clubs.play}
+                                                win={clubs.win}
+                                                draw={clubs.draw}
+                                                lose={clubs.lose}
+                                                gf={clubs.gf}
+                                                ga={clubs.ga}
+                                                gd={clubs.gd}
+                                                pts={clubs.pts}
+                                                state={clubs.state}
+                                            />
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </Item>
+                        </>
+                    )}
+                </Content>
+
+            </Container>
+
+        ));
+}
+
+
+// class PlayerValue extends Component {
+//     state = {
+//         playerValues: [],
+//         fowardValues: [],
+//         midfielderValues: [],
+//         defenderValues: [],
+//         goalkeeperValues: [],
+//         clubValues: [],
+//     };
+
+//     async componentDidMount() {
 //         try {
-
-//             let res = await fetch('http://127.0.0.1:8000/premierPlayer/');
-//             const premierPlayers = await res.json();
-//             setpremierPlayers(premierPlayers);
-
-//             res = await fetch('http://127.0.0.1:8000/laligaPlayer/');
-//             const laligaPlayers = await res.json();
-//             setlaligaPlayers(laligaPlayers);
-
-//             res = await fetch('http://127.0.0.1:8000/bundesligaPlayer/')
-//             const bundesligaPlayers = await res.json();
-//             setbundesligaPlayers(bundesligaPlayers);
-
-//             res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
-//             const serieAPlayers = await res.json();
-//             setserieAPlayers(serieAPlayers);
-
-//             res = await fetch('http://127.0.0.1:8000/defenderValue/')
-//             const ligue1Players = await res.json();
-//             setligue1Players(ligue1Players);
-
-//             // res = await fetch('http://127.0.0.1:8000/ligue1Player/')
-//             // const goalkeeperValues = await res.json();
-//             // setGoalkeeperValues(goalkeeperValues);
-
+//             let res = await fetch('http://127.0.0.1:8000/playerValue/');
+//             const playerValues = await res.json();
+//             res = await fetch('http://127.0.0.1:8000/forwardValue/');
+//             const fowardValues = await res.json();
+//             this.setState({
+//                 playerValues,
+//                 fowardValues
+//             });
+//             console.log(fowardValues);
 //         } catch (e) {
 //             console.log(e);
-//         } finally {
-//             setLoading(false);
 //         }
 //     }
-//     useEffect(() => {
-//         loadValue();
-//     }, []);
-//     return { loading, premierPlayers, laligaPlayers, bundesligaPlayers, serieAPlayers, ligue1Players };
+
+//     render() {
+//         return (
+// <div>
+//     {this.state.playerValues.map(player => (
+//         <div key={player.ranking}>
+//             <h3>{player.name}</h3>
+//             <span>{player.value}</span>
+//         </div>
+//     ))}
+// </div>
+// <div>
+//     {this.state.forwardValues.map(player => (
+//         <div key={player.ranking}>
+//             <h3>{player.name}</h3>
+//             <span>{player.value}</span>
+//         </div>
+//     ))}
+// </div>
+//         );
+//     }
 // }
 
-// const Value = () => {
-//     const { loading, premierPlayers, laligaPlayers, bundesligaPlayers, serieAPlayers, ligue1Players } = useValue();
-//     // console.log(playerValues);
-//     // console.log(playerValues[0].player_image);
-//     return (
-//         loading ? (
-//             <Loader>
-//                 <Helmet>
-//                     <title>5 Ligue Player Stats</title>
-//                 </Helmet>
-//             </Loader>
-//         ) : (
-//             <Container>
-//                 <Helmet>
-//                     <title>5 Ligue Player Stats</title>
-//                 </Helmet>
-//                 <Content>
-//                     {premierPlayers && premierPlayers.length > 0 && (
-//                         <Item>
-//                             <SectionTitle><LigueImage src="/assets/premierLeague.PNG" /> Premier League</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {premierPlayers.map(player => (
-//                                     <ValueSection
-//                                         key={player.specific_id}
-//                                         ranking={player.rating}
-//                                         name={player.name}
-//                                         image={player.player_image}
-//                                         team={player.team}
-//                                         value={player.value}
-//                                         team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                     {clubValues && clubValues.length > 0 && (
-//                         <Item>
-//                             <SectionTitle>Most Valuable Club</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {clubValues.map(club => (
-//                                     <ValueSection
-//                                         key={club.specific_id}
-//                                         ranking={club.ranking}
-//                                         name={club.name}
-//                                         image={club.club_image}
-//                                         Competition={club.Competition}
-//                                         value={club.club_value}
-//                                     // team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                     {fowardValues && fowardValues.length > 0 && (
-//                         <Item>
-//                             <SectionTitle>Most Valuable Forward</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {fowardValues.map(player => (
-//                                     <ValueSection
-//                                         key={player.specific_id}
-//                                         ranking={player.ranking}
-//                                         name={player.name}
-//                                         image={player.player_image}
-//                                         team={player.team}
-//                                         value={player.value}
-//                                         team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                     {midfielderValues && midfielderValues.length > 0 && (
-//                         <Item>
-//                             <SectionTitle>Most Valuable MidFielders</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {midfielderValues.map(player => (
-//                                     <ValueSection
-//                                         key={player.specific_id}
-//                                         ranking={player.ranking}
-//                                         name={player.name}
-//                                         image={player.player_image}
-//                                         team={player.team}
-//                                         value={player.value}
-//                                     // team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                     {defenderValues && defenderValues.length > 0 && (
-//                         <Item>
-//                             <SectionTitle>Most Valuable Defenders</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {defenderValues.map(player => (
-//                                     <ValueSection
-//                                         key={player.specific_id}
-//                                         ranking={player.ranking}
-//                                         name={player.name}
-//                                         image={player.player_image}
-//                                         team={player.team}
-//                                         value={player.value}
-//                                     // team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                     {goalkeeperValues && goalkeeperValues.length > 0 && (
-//                         <Item>
-//                             <SectionTitle>Most Valuable GoalKeepers</SectionTitle>
-//                             <SectionHr></SectionHr>
-//                             <ValueContent>
-//                                 {goalkeeperValues.map(player => (
-//                                     <ValueSection
-//                                         key={player.specific_id}
-//                                         ranking={player.ranking}
-//                                         name={player.name}
-//                                         image={player.player_image}
-//                                         team={player.team}
-//                                         value={player.value}
-//                                     // team_image={player.team_image}
-//                                     />
-//                                 ))}
-//                             </ValueContent>
-//                         </Item>
-//                     )}
-//                 </Content>
-
-//             </Container>
-
-//         ));
-// }
-
-
-// // class PlayerValue extends Component {
-// //     state = {
-// //         playerValues: [],
-// //         fowardValues: [],
-// //         midfielderValues: [],
-// //         defenderValues: [],
-// //         goalkeeperValues: [],
-// //         clubValues: [],
-// //     };
-
-// //     async componentDidMount() {
-// //         try {
-// //             let res = await fetch('http://127.0.0.1:8000/playerValue/');
-// //             const playerValues = await res.json();
-// //             res = await fetch('http://127.0.0.1:8000/forwardValue/');
-// //             const fowardValues = await res.json();
-// //             this.setState({
-// //                 playerValues,
-// //                 fowardValues
-// //             });
-// //             console.log(fowardValues);
-// //         } catch (e) {
-// //             console.log(e);
-// //         }
-// //     }
-
-// //     render() {
-// //         return (
-// // <div>
-// //     {this.state.playerValues.map(player => (
-// //         <div key={player.ranking}>
-// //             <h3>{player.name}</h3>
-// //             <span>{player.value}</span>
-// //         </div>
-// //     ))}
-// // </div>
-// // <div>
-// //     {this.state.forwardValues.map(player => (
-// //         <div key={player.ranking}>
-// //             <h3>{player.name}</h3>
-// //             <span>{player.value}</span>
-// //         </div>
-// //     ))}
-// // </div>
-// //         );
-// //     }
-// // }
-
-// // export default PlayerValue;
-// export default Value;
+// export default PlayerValue;
+export default Value;

@@ -14,7 +14,11 @@ from crawled_data.models import Ligue1PlayerStatistics
 from crawled_data.models import LaligaPlayerStatistics
 from crawled_data.models import SerieAPlayerStatistics
 from crawled_data.models import BundesligaPlayerStatistics
-
+from crawled_data.models import PremierClubStatistics
+from crawled_data.models import LaligaClubStatistics
+from crawled_data.models import BundesligaClubStatistics
+from crawled_data.models import SerieAClubStatistics
+from crawled_data.models import Ligue1ClubStatistics
 
 admin.site.register(PlayerData)
 admin.site.register(ClubData)
@@ -27,3 +31,8 @@ admin.site.register(Ligue1PlayerStatistics)
 admin.site.register(LaligaPlayerStatistics)
 admin.site.register(SerieAPlayerStatistics)
 admin.site.register(BundesligaPlayerStatistics)
+admin.site.register(PremierClubStatistics)
+admin.site.register(LaligaClubStatistics)
+admin.site.register(BundesligaClubStatistics)
+admin.site.register(SerieAClubStatistics)
+admin.site.register(Ligue1ClubStatistics)

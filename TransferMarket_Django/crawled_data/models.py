@@ -145,3 +145,76 @@ class Ligue1PlayerStatistics(models.Model):
     MotM = models.CharField(max_length=225)
     Rating = models.CharField(max_length=225)
 
+
+class PremierClubStatistics(models.Model):
+    specific_id = models.CharField(max_length=225)
+    ranking = models.CharField(max_length=225,default = '')
+    state = models.CharField(max_length=225, default = '')
+    name = models.CharField(max_length=225)
+    play = models.CharField(max_length=225)
+    win = models.CharField(max_length=225)
+    draw = models.CharField(max_length=225)
+    lose = models.CharField(max_length=225)
+    gf = models.CharField(max_length=225)
+    gd = models.CharField(max_length=225)
+    ga = models.CharField(max_length=225)
+    pts = models.CharField(max_length=225)
+
+class LaligaClubStatistics(models.Model):
+    specific_id = models.CharField(max_length=225)
+    ranking = models.CharField(max_length=225,default = '')
+    state = models.CharField(max_length=225, default = '')
+    name = models.CharField(max_length=225)
+    play = models.CharField(max_length=225)
+    win = models.CharField(max_length=225)
+    draw = models.CharField(max_length=225)
+    lose = models.CharField(max_length=225)
+    gf = models.CharField(max_length=225)
+    gd = models.CharField(max_length=225)
+    ga = models.CharField(max_length=225)
+    pts = models.CharField(max_length=225)
+
+class BundesligaClubStatistics(models.Model):
+    specific_id = models.CharField(max_length=225)
+    ranking = models.CharField(max_length=225,default = '')
+    state = models.CharField(max_length=225, default = '')
+    name = models.CharField(max_length=225)
+    play = models.CharField(max_length=225)
+    win = models.CharField(max_length=225)
+    draw = models.CharField(max_length=225)
+    lose = models.CharField(max_length=225)
+    gf = models.CharField(max_length=225)
+    gd = models.CharField(max_length=225)
+    ga = models.CharField(max_length=225)
+    pts = models.CharField(max_length=225)
+
+class SerieAClubStatistics(models.Model):
+    specific_id = models.CharField(max_length=225)
+    ranking = models.CharField(max_length=225,default = '')
+    state = models.CharField(max_length=225, default = '')
+    name = models.CharField(max_length=225)
+    play = models.CharField(max_length=225)
+    win = models.CharField(max_length=225)
+    draw = models.CharField(max_length=225)
+    lose = models.CharField(max_length=225)
+    gf = models.CharField(max_length=225)
+    gd = models.CharField(max_length=225)
+    ga = models.CharField(max_length=225)
+    pts = models.CharField(max_length=225)
+
+class Ligue1ClubStatistics(models.Model):
+    specific_id = models.CharField(max_length=225)
+    ranking = models.CharField(max_length=225,default = '')
+    state = models.CharField(max_length=225, default = '')
+    name = models.CharField(max_length=225)
+    play = models.CharField(max_length=225)
+    win = models.CharField(max_length=225)
+    draw = models.CharField(max_length=225)
+    lose = models.CharField(max_length=225)
+    gf = models.CharField(max_length=225)
+    gd = models.CharField(max_length=225)
+    ga = models.CharField(max_length=225)
+    pts = models.CharField(max_length=225)
+
+    
+    

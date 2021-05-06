@@ -12,6 +12,11 @@ from .serializers import LaligaPlayerSerializer
 from .serializers import BundesligaPlayerSerializer
 from .serializers import SerieAPlayerSerializer
 from .serializers import Ligue1PlayerSerializer
+from .serializers import PremierClubSerializer
+from .serializers import LaLigaClubSerializer
+from .serializers import BundesligaClubSerializer
+from .serializers import SerieAClubSerializer
+from .serializers import Ligue1ClubSerializer
 
 from .models import PlayerData
 from .models import ForwardValue
@@ -24,6 +29,12 @@ from .models import LaligaPlayerStatistics
 from .models import SerieAPlayerStatistics
 from .models import BundesligaPlayerStatistics
 from .models import Ligue1PlayerStatistics
+from .models import PremierClubStatistics
+from .models import LaligaClubStatistics
+from .models import BundesligaClubStatistics
+from .models import SerieAClubStatistics
+from .models import Ligue1ClubStatistics
+
 # Create your views here.
 
 # def player_value(request):
@@ -91,43 +102,67 @@ class DetailGoalKeeperValue(generics.RetrieveUpdateDestroyAPIView):
 class ListPremierPlayerStatistics(generics.ListCreateAPIView):
     serializer_class=PremierPlayerSerializer
     queryset=PremierPlayerStatistics.objects.all()
-
 class DetailPremierPlayerStatistics(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=PremierPlayerSerializer
     queryset=PremierPlayerStatistics.objects.all()
-
+class ListPremierClubStatistics(generics.ListCreateAPIView):
+    serializer_class=PremierClubSerializer
+    queryset=PremierClubStatistics.objects.all()
+class DetailPremierClubStatistics(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=PremierClubSerializer
+    queryset=PremierClubStatistics.objects.all()
 #Laliga
 class ListLaligaPlayerStatistics(generics.ListCreateAPIView):
     serializer_class=LaligaPlayerSerializer
     queryset=LaligaPlayerStatistics.objects.all()
-
 class DetailLaligaPlayerStatistics(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=LaligaPlayerSerializer
     queryset=LaligaPlayerStatistics.objects.all()
+class ListLaligaClubStatistics(generics.ListCreateAPIView):
+    serializer_class=LaLigaClubSerializer
+    queryset=LaligaClubStatistics.objects.all()
+class DetailLaligaClubStatistics(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=LaLigaClubSerializer
+    queryset=LaligaClubStatistics.objects.all()
 
 # Bundesliga
 class ListBundesligaPlayerStatistics(generics.ListCreateAPIView):
     serializer_class=BundesligaPlayerSerializer
     queryset=BundesligaPlayerStatistics.objects.all()
-
 class DetailBundesligaPlayerStatistics(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=BundesligaPlayerSerializer
     queryset=BundesligaPlayerStatistics.objects.all()
+class ListBundesligaClubStatistics(generics.ListCreateAPIView):
+    serializer_class=BundesligaClubSerializer
+    queryset=BundesligaClubStatistics.objects.all()
+class DetailBundesligaClubStatistics(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=BundesligaClubSerializer
+    queryset=BundesligaClubStatistics.objects.all()
 
 # SerieA
 class ListSerieAPlayerStatistics(generics.ListCreateAPIView):
     serializer_class=SerieAPlayerSerializer
     queryset=SerieAPlayerStatistics.objects.all()
-
 class DetailSerieAPlayerStatistics(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=SerieAPlayerSerializer
     queryset=SerieAPlayerStatistics.objects.all()
+class ListSerieAClubStatistics(generics.ListCreateAPIView):
+    serializer_class=SerieAClubSerializer
+    queryset=SerieAClubStatistics.objects.all()
+class DetailSerieAClubStatistics(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=SerieAClubSerializer
+    queryset=SerieAClubStatistics.objects.all()
 
 # Ligue1
 class ListLigue1PlayerStatistics(generics.ListCreateAPIView):
     serializer_class=Ligue1PlayerSerializer
     queryset=Ligue1PlayerStatistics.objects.all()
-
 class DetailLigue1PlayerStatistics(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=Ligue1PlayerSerializer
     queryset=Ligue1PlayerStatistics.objects.all()
+class ListLigue1ClubStatistics(generics.ListCreateAPIView):
+    serializer_class=Ligue1ClubSerializer
+    queryset=Ligue1ClubStatistics.objects.all()
+class DetailLigue1ClubStatistics(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=Ligue1ClubSerializer
+    queryset=Ligue1ClubStatistics.objects.all()

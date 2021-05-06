@@ -29,11 +29,20 @@ urlpatterns = [
     path('midfieldValue/',include('crawled_data.midfieldValue')),
     path('defenderValue/',include('crawled_data.defenderValue')),
     path('goalKeeperValue/',include('crawled_data.goalKeeperValue')),
+
     path('premierPlayer/',include('crawled_data.PremierPlayer')),
     path('laligaPlayer/',include('crawled_data.LaligaPlayer')),
     path('bundesligaPlayer/',include('crawled_data.BundesligaPlayer')),
     path('serieAPlayer/',include('crawled_data.SerieAPlayer')),
     path('ligue1Player/',include('crawled_data.Ligue1Player')),
+
+    path('premierClub/',include('crawled_data.PremierClub')),
+    path('laligaClub/',include('crawled_data.LaLigaClub')),
+    path('bundesligaClub/',include('crawled_data.BundesligaClub')),
+    path('serieAClub/',include('crawled_data.SerieAClub')),
+    path('ligue1Club/',include('crawled_data.Ligue1Club')),
+
+
     # path('',include('crawled_data.urls')),
     # path('playerValue',include(router.urls)),
 ]

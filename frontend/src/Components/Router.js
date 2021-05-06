@@ -2,7 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import Home from "Routes/Home";
 import Value from "Routes/Value";
-import clubStats from "Routes/ClubStats"
+import premierClubStats from "Routes/ClubStats/premierLeague"
+import laLigaClubStats from "Routes/ClubStats/LaLiga"
+import bundesLigaClubStats from "Routes/ClubStats/bundesLiga"
+import serieAClubStats from "Routes/ClubStats/serieA"
+import ligue1ClubStats from "Routes/ClubStats/Ligue1"
 import PremierPlayerStat from "Routes/playerStats/premierLeague"
 import LiLigaPlayerStat from "Routes/playerStats/LaLiga"
 import BundesPlayerStat from "Routes/playerStats/bundesLiga"
@@ -24,7 +28,11 @@ export default () => (
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/Value" exact component={Value} />
-                {/* <Route path="/clubStats" component={clubStats} /> */}
+                <Route path="/premierCStats" component={premierClubStats} />
+                <Route path="/laLigaCStats" component={laLigaClubStats} />
+                <Route path="/bundesLigaCStats" component={bundesLigaClubStats} />
+                <Route path="/serieACStats" component={serieAClubStats} />
+                <Route path="/ligue1CStats" component={ligue1ClubStats} />
                 <Route path="/premierPStats" component={PremierPlayerStat} />
                 <Route path="/LaLigaPStats" component={LiLigaPlayerStat} />
                 <Route path="/bundesLigaPStats" component={BundesPlayerStat} />
