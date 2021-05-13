@@ -9,7 +9,7 @@ import BundesLigaImg from '../../../assets/bundesLiga.PNG';
 import SerieAImg from '../../../assets/serieA.PNG';
 import Ligue1Img from '../../../assets/ligue1.PNG';
 import { Link } from "react-router-dom"
-
+import { Ligue1ClubStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -75,18 +75,21 @@ const Table = styled.table`
     border-spacing:30px;
     border-collapse: separate;
 `;
-const useValue = () => {
+const useClubStats = () => {
     const [loading, setLoading] = useState(true);
     const [ligue1Clubs, setligue1Clubs] = useState([]);
     // const [clubValues, setClubValues] = useState([]);
     const loadValue = async () => {
         setLoading(true);
         try {
+            const ligue1Clubs = await Ligue1ClubStats();
 
+            console.log(ligue1Clubs.data);
+            setligue1Clubs(ligue1Clubs.data);
 
-            let res = await fetch('http://127.0.0.1:8000/ligue1Club/')
-            const ligue1Clubs = await res.json();
-            setligue1Clubs(ligue1Clubs);
+            // let res = await fetch('http://127.0.0.1:8000/ligue1Club/')
+            // const ligue1Clubs = await res.json();
+            // setligue1Clubs(ligue1Clubs);
 
             // res = await fetch('http://127.0.0.1:8000/ligue1Player/')
             // const goalkeeperValues = await res.json();
@@ -105,7 +108,7 @@ const useValue = () => {
 }
 
 const Value = () => {
-    const { loading, ligue1Clubs } = useValue();
+    const { loading, ligue1Clubs } = useClubStats();
     // console.log(playerValues);
     // console.log(playerValues[0].player_image);
     return (

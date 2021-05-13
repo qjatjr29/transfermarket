@@ -75,20 +75,20 @@ def addPlayerStats(playerStatistics):
     for item in playerStatistics:
         print("new item added!" + item['name'])
         print(item)
-        PlayerStatistics(
-            League=item['League'],
-            specific_id=item['specific_id'],
-            name= item['name'],
-            age= item['age'],
-            position= item['position'],
-            Games= item['Apps'],
-            Goals= item['Goals'],
-            Assists= item['Assists'],
-            SpG= item['SpG'],
-            PS= item['PS%'],
-            MotM= item['MotM'],
-            Rating= item['Rating']
-        ).save()
+        # PlayerStatistics(
+        #     League=item['League'],
+        #     specific_id=item['specific_id'],
+        #     name= item['name'],
+        #     age= item['age'],
+        #     position= item['position'],
+        #     Games= item['Apps'],
+        #     Goals= item['Goals'],
+        #     Assists= item['Assists'],
+        #     SpG= item['SpG'],
+        #     PS= item['PS%'],
+        #     MotM= item['MotM'],
+        #     Rating= item['Rating']
+        # ).save()
     
     # return addItems
 

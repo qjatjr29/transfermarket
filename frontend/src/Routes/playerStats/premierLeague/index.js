@@ -4,7 +4,8 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import PlayerStatSection from 'Components/playerStatSection';
 import PremierImg from '../../../assets/premierLeague.PNG';
-
+import { Link } from "react-router-dom"
+import { premierPlayerStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -51,7 +52,8 @@ const Table = styled.table`
     border-spacing:50px;
     border-collapse: separate;
 `;
-
+const SLink = styled(Link)`
+`;
 const usePlyerStat = () => {
     const [loading, setLoading] = useState(true);
     const [premierPlayers, setpremierPlayers] = useState([]);
@@ -59,26 +61,15 @@ const usePlyerStat = () => {
     const loadStat = async () => {
         setLoading(true);
         try {
+            const premierPlayers = await premierPlayerStats();
 
-            let res = await fetch('http://127.0.0.1:8000/premierPlayer/');
-            const premierPlayers = await res.json();
-            setpremierPlayers(premierPlayers);
+            console.log(premierPlayers.data);
+            setpremierPlayers(premierPlayers.data);
 
-            // res = await fetch('http://127.0.0.1:8000/laligaPlayer/');
-            // const laligaPlayers = await res.json();
-            // setlaligaPlayers(laligaPlayers);
+            // let res = await fetch('http://127.0.0.1:8000/premierPlayer/');
+            // const premierPlayers = await res.json();
+            // setpremierPlayers(premierPlayers);
 
-            // res = await fetch('http://127.0.0.1:8000/bundesligaPlayer/')
-            // const bundesligaPlayers = await res.json();
-            // setbundesligaPlayers(bundesligaPlayers);
-
-            // res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
-            // const serieAPlayers = await res.json();
-            // setserieAPlayers(serieAPlayers);
-
-            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            // const ligue1Players = await res.json();
-            // setligue1Players(ligue1Players);
         } catch (e) {
             console.log(e);
         } finally {
@@ -110,7 +101,10 @@ const PremierPlayerStat = () => {
                 <Content>
                     {premierPlayers && premierPlayers.length > 0 && (
                         <Item>
-                            <SectionTitle><LigueImage src={PremierImg} />   Premier League</SectionTitle>
+                            <SLink to="/premierCStats">
+                                <SectionTitle><LigueImage src={PremierImg} />   Premier League</SectionTitle>
+                            </SLink>
+
                             <SectionHr></SectionHr>
                             <Table>
                                 <thead>

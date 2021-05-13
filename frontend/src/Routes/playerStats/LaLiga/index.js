@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import PlayerStatSection from 'Components/playerStatSection';
 import LaLigaImg from '../../../assets/laLiga.PNG';
+import { Link } from "react-router-dom"
+import { laLigaPlayerStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -58,7 +60,8 @@ const Table = styled.table`
     border-spacing:50px;
     border-collapse: separate;
 `;
-
+const SLink = styled(Link)`
+`;
 const usePlyerStat = () => {
     const [loading, setLoading] = useState(true);
     const [laligaPlayers, setlaligaPlayers] = useState([]);
@@ -66,23 +69,16 @@ const usePlyerStat = () => {
     const loadStat = async () => {
         setLoading(true);
         try {
+            const laligaPlayers = await laLigaPlayerStats();
+
+            console.log(laligaPlayers.data);
+            setlaligaPlayers(laligaPlayers.data);
+
+            // let res = await fetch('http://127.0.0.1:8000/laligaPlayer/');
+            // const laligaPlayers = await res.json();
+            // setlaligaPlayers(laligaPlayers);
 
 
-            let res = await fetch('http://127.0.0.1:8000/laligaPlayer/');
-            const laligaPlayers = await res.json();
-            setlaligaPlayers(laligaPlayers);
-
-            // res = await fetch('http://127.0.0.1:8000/bundesligaPlayer/')
-            // const bundesligaPlayers = await res.json();
-            // setbundesligaPlayers(bundesligaPlayers);
-
-            // res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
-            // const serieAPlayers = await res.json();
-            // setserieAPlayers(serieAPlayers);
-
-            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            // const ligue1Players = await res.json();
-            // setligue1Players(ligue1Players);
         } catch (e) {
             console.log(e);
         } finally {
@@ -114,7 +110,10 @@ const LiLigaPlayerStat = () => {
                 <Content>
                     {laligaPlayers && laligaPlayers.length > 0 && (
                         <Item>
-                            <SectionTitle><LigueImage src={LaLigaImg} /> LiLiga</SectionTitle>
+                            <SLink to="/LaLigaCStats">
+                                <SectionTitle><LigueImage src={LaLigaImg} /> LiLiga</SectionTitle>
+                            </SLink>
+
                             <SectionHr></SectionHr>
                             <Table>
                                 <thead>
@@ -141,7 +140,7 @@ const LiLigaPlayerStat = () => {
                                             age={player.age}
                                             position={player.position}
                                             games={player.Games}
-                                            goals={player.goals}
+                                            goals={player.Goals}
                                             assists={player.Assists}
                                             SpG={player.SpG}
                                             Ps={player.PS}

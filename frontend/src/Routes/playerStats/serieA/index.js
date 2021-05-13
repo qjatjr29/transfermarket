@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import PlayerStatSection from 'Components/playerStatSection';
 import serieAImg from '../../../assets/serieA.PNG';
+import { Link } from "react-router-dom"
+import { SerieAPlayerStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -58,7 +60,8 @@ const Table = styled.table`
     border-spacing:50px;
     border-collapse: separate;
 `;
-
+const SLink = styled(Link)`
+`;
 const usePlyerStat = () => {
     const [loading, setLoading] = useState(true);
     const [serieAPlayers, setserieAPlayers] = useState([]);
@@ -66,14 +69,15 @@ const usePlyerStat = () => {
     const loadStat = async () => {
         setLoading(true);
         try {
+            const serieAPlayers = await SerieAPlayerStats();
 
-            let res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
-            const serieAPlayers = await res.json();
-            setserieAPlayers(serieAPlayers);
+            console.log(serieAPlayers.data);
+            setserieAPlayers(serieAPlayers.data);
+            // let res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
+            // const serieAPlayers = await res.json();
+            // setserieAPlayers(serieAPlayers);
 
-            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            // const ligue1Players = await res.json();
-            // setligue1Players(ligue1Players);
+
         } catch (e) {
             console.log(e);
         } finally {
@@ -105,7 +109,10 @@ const SerieAPlayerStat = () => {
                 <Content>
                     {serieAPlayers && serieAPlayers.length > 0 && (
                         <Item>
-                            <SectionTitle><LigueImage src={serieAImg} /> Serie A </SectionTitle>
+                            <SLink to="/serieACStats">
+                                <SectionTitle><LigueImage src={serieAImg} /> Serie A </SectionTitle>
+                            </SLink>
+
                             <SectionHr></SectionHr>
                             <Table>
                                 <thead>

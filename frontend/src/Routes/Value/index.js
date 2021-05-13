@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import ValueSection from 'Components/ValueSection';
-
+import { AllValueList, ForwardValueList, MidfielderValueList, DefenderValueList, GoalkeeperValueList, ClubValueList } from '../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -59,29 +59,43 @@ const useValue = () => {
     const loadValue = async () => {
         setLoading(true);
         try {
-            let res = await fetch('http://127.0.0.1:8000/playerValue/');
-            const playerValues = await res.json();
-            setPlayerValues(playerValues);
+            // let res = await fetch('http://127.0.0.1:8000/playerValue/');
+            // const playerValues = await res.json();
+            // setPlayerValues(playerValues);
 
-            res = await fetch('http://127.0.0.1:8000/forwardValue/');
-            const fowardValues = await res.json();
-            setFowardValues(fowardValues);
+            // res = await fetch('http://127.0.0.1:8000/forwardValue/');
+            // const fowardValues = await res.json();
+            // setFowardValues(fowardValues);
 
-            res = await fetch('http://127.0.0.1:8000/clubValue/')
-            const clubValues = await res.json();
-            setClubValues(clubValues);
+            // res = await fetch('http://127.0.0.1:8000/clubValue/')
+            // const clubValues = await res.json();
+            // setClubValues(clubValues);
 
-            res = await fetch('http://127.0.0.1:8000/midfieldValue/')
-            const midfielderValues = await res.json();
-            setMidfielderValues(midfielderValues);
+            // res = await fetch('http://127.0.0.1:8000/midfieldValue/')
+            // const midfielderValues = await res.json();
+            // setMidfielderValues(midfielderValues);
 
-            res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            const defenderValues = await res.json();
-            setDefenderValues(defenderValues);
+            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
+            // const defenderValues = await res.json();
+            // setDefenderValues(defenderValues);
 
-            res = await fetch('http://127.0.0.1:8000/goalKeeperValue/')
-            const goalkeeperValues = await res.json();
-            setGoalkeeperValues(goalkeeperValues);
+            // res = await fetch('http://127.0.0.1:8000/goalKeeperValue/')
+            // const goalkeeperValues = await res.json();
+            // setGoalkeeperValues(goalkeeperValues);
+
+            const playerValues = await AllValueList();
+            const fowardValues = await ForwardValueList();
+            const midfielderValues = await MidfielderValueList();
+            const defenderValues = await DefenderValueList();
+            const goalkeeperValues = await GoalkeeperValueList();
+            const clubValues = await ClubValueList();
+            console.log(clubValues.data);
+            setFowardValues(fowardValues.data);
+            setPlayerValues(playerValues.data);
+            setMidfielderValues(midfielderValues.data);
+            setDefenderValues(defenderValues.data);
+            setGoalkeeperValues(goalkeeperValues.data);
+            setClubValues(clubValues.data);
 
         } catch (e) {
             console.log(e);
@@ -123,9 +137,9 @@ const Value = () => {
                                         ranking={player.ranking}
                                         name={player.name}
                                         image={player.player_image}
-                                        team={player.team}
+                                        // team={player.team}
                                         value={player.value}
-                                        team_image={player.team_image}
+                                    // team_image={player.team_image}
                                     />
                                 ))}
                             </ValueContent>
@@ -143,7 +157,7 @@ const Value = () => {
                                         name={club.name}
                                         image={club.club_image}
                                         Competition={club.Competition}
-                                        value={club.club_value}
+                                        value={club.value}
                                     // team_image={player.team_image}
                                     />
                                 ))}

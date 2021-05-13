@@ -13,6 +13,7 @@ import BundesPlayerStat from "Routes/playerStats/bundesLiga"
 import SerieAPlayerStat from "Routes/playerStats/serieA"
 import Ligue1PlayerStat from "Routes/playerStats/Ligue1"
 // import clubValue from "Routes/ClubValue";
+import Search from "Routes/Search"
 import Navigation from "Components/Navigation";
 // import Detail from "Routes/Detail";
 // import People from "Routes/People";
@@ -38,7 +39,7 @@ export default () => (
                 <Route path="/bundesLigaPStats" component={BundesPlayerStat} />
                 <Route path="/serieAPStats" component={SerieAPlayerStat} />
                 <Route path="/Ligue1PStats" component={Ligue1PlayerStat} />
-                {/* <Route path="/people" component={People} /> */}
+                <Route path="/Search" component={Search} />
                 {/* <Route path="/movie/:id" component={Detail} />
                 <Route path="/show/:id" component={Detail} />
                 <Route path="/person/:id" component={peopleDetail} /> */}

@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import PlayerStatSection from 'Components/playerStatSection';
 import bundesLigaImg from '../../../assets/bundesLiga.PNG';
+import { Link } from "react-router-dom"
+import { bundesLigaPlayerStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -58,7 +60,8 @@ const Table = styled.table`
     border-spacing:50px;
     border-collapse: separate;
 `;
-
+const SLink = styled(Link)`
+`;
 const usePlyerStat = () => {
     const [loading, setLoading] = useState(true);
     const [bundesligaPlayers, setbundesligaPlayers] = useState([]);
@@ -66,18 +69,15 @@ const usePlyerStat = () => {
     const loadStat = async () => {
         setLoading(true);
         try {
+            const bundesligaPlayers = await bundesLigaPlayerStats();
 
-            let res = await fetch('http://127.0.0.1:8000/bundesligaPlayer/')
-            const bundesligaPlayers = await res.json();
-            setbundesligaPlayers(bundesligaPlayers);
+            console.log(bundesligaPlayers.data);
+            setbundesligaPlayers(bundesligaPlayers.data);
+            // let res = await fetch('http://127.0.0.1:8000/bundesligaPlayer/')
+            // const bundesligaPlayers = await res.json();
+            // setbundesligaPlayers(bundesligaPlayers);
 
-            // res = await fetch('http://127.0.0.1:8000/serieAPlayer/')
-            // const serieAPlayers = await res.json();
-            // setserieAPlayers(serieAPlayers);
 
-            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            // const ligue1Players = await res.json();
-            // setligue1Players(ligue1Players);
         } catch (e) {
             console.log(e);
         } finally {
@@ -109,7 +109,10 @@ const BundesPlayerStat = () => {
                 <Content>
                     {bundesligaPlayers && bundesligaPlayers.length > 0 && (
                         <Item>
-                            <SectionTitle><LigueImage src={bundesLigaImg} /> BundesLiga</SectionTitle>
+                            <SLink to="/bundesLigaCStats">
+                                <SectionTitle><LigueImage src={bundesLigaImg} /> BundesLiga</SectionTitle>
+                            </SLink>
+
                             <SectionHr></SectionHr>
                             <Table>
                                 <thead>
@@ -136,7 +139,7 @@ const BundesPlayerStat = () => {
                                             age={player.age}
                                             position={player.position}
                                             games={player.Games}
-                                            goals={player.goals}
+                                            goals={player.Goals}
                                             assists={player.Assists}
                                             SpG={player.SpG}
                                             Ps={player.PS}

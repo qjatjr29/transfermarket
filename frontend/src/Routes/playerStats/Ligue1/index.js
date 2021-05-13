@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import PlayerStatSection from 'Components/playerStatSection';
 import LigueImg from '../../../assets/ligue1.PNG';
+import { Link } from "react-router-dom"
+import { Ligue1PlayerStats } from '../../../Api/api';
 const Container = styled.div`
     height:calc(100vh - 50px);
     width:100%;
@@ -58,7 +60,8 @@ const Table = styled.table`
     border-spacing:50px;
     border-collapse: separate;
 `;
-
+const SLink = styled(Link)`
+`;
 const usePlyerStat = () => {
     const [loading, setLoading] = useState(true);
     const [ligue1Players, setligue1Players] = useState([]);
@@ -67,9 +70,13 @@ const usePlyerStat = () => {
         setLoading(true);
         try {
 
-            let res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            const ligue1Players = await res.json();
-            setligue1Players(ligue1Players);
+            const ligue1Players = await Ligue1PlayerStats();
+
+            console.log(ligue1Players.data);
+            setligue1Players(ligue1Players.data);
+            // let res = await fetch('http://127.0.0.1:8000/defenderValue/')
+            // const ligue1Players = await res.json();
+            // setligue1Players(ligue1Players);
         } catch (e) {
             console.log(e);
         } finally {
@@ -101,7 +108,10 @@ const Ligue1PlayerStat = () => {
                 <Content>
                     {ligue1Players && ligue1Players.length > 0 && (
                         <Item>
-                            <SectionTitle><LigueImage src={LigueImg} /> Ligue 1 </SectionTitle>
+                            <SLink to="/Ligue1CStats">
+                                <SectionTitle><LigueImage src={LigueImg} /> Ligue 1 </SectionTitle>
+                            </SLink>
+
                             <SectionHr></SectionHr>
                             <Table>
                                 <thead>
@@ -128,7 +138,7 @@ const Ligue1PlayerStat = () => {
                                             age={player.age}
                                             position={player.position}
                                             games={player.Games}
-                                            goals={player.goals}
+                                            goals={player.Goals}
                                             assists={player.Assists}
                                             SpG={player.SpG}
                                             Ps={player.PS}

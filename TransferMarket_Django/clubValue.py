@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',"TransferMarket_Django.settings")
 import django
 django.setup()
-from crawled_data.models import ClubData
+from crawled_data.models import ClubValue
 
 
 headers = {
@@ -21,12 +21,10 @@ headers = {
 def extractInfo(info):
     # ClubInfo = []
     club = info.find_all("td")
-
     ranking = int(club[0].text)
     specific_id= ranking
     club_img = club[1].find("a").find("img")['src']
     name = club[2].find("a").text
-    Competition_image = club[3].find("img")['src']
     Competition = club[3].find("a")['title']
     club_value = club[4].find("b").text
     
@@ -36,7 +34,6 @@ def extractInfo(info):
         "ranking": ranking,
         "club_image":club_img,
         "name": name,
-        "Competition_image": Competition_image,
         "Competition": Competition,
         "club_value": club_value
     }
@@ -62,36 +59,33 @@ def extract(lastPage, url):
 def getClubValue():
     url = "https://www.transfermarkt.com/spieler-statistik/wertvollstemannschaften/marktwertetop?page="
     
-    lastPages = 4
+    lastPages = 2
  
     ClubValue = extract(lastPages, url)
-    ranking = []
-    club_image=[]
-    name = []
-    Competition_image = []
-    Competition = []
-    club_value = []
-    for i in range(0, len(ClubValue)):
-        ranking.append(ClubValue[i]['ranking'])
-        name.append(ClubValue[i]['name'])
-        club_image.append(ClubValue[i]['club_image'])
-        Competition_image.append(ClubValue[i]['Competition_image'])
-        Competition.append(ClubValue[i]['Competition'])
-        club_value.append(ClubValue[i]['club_value'])
+    # ranking = []
+    # club_image=[]
+    # name = []
+    # Competition = []
+    # club_value = []
+    # for i in range(0, len(ClubValue)):
+    #     ranking.append(ClubValue[i]['ranking'])
+    #     name.append(ClubValue[i]['name'])
+    #     club_image.append(ClubValue[i]['club_image'])
+    #     Competition.append(ClubValue[i]['Competition'])
+    #     club_value.append(ClubValue[i]['club_value'])
 
-    df = pd.DataFrame({
-        "ranking": ranking,
-        "club_image": club_image,
-        "name": name,
-        "Competition_image": Competition_image,
-        "Competition": Competition,
-        "club_value": club_value
-    })
+    # df = pd.DataFrame({
+    #     "ranking": ranking,
+    #     "club_image": club_image,
+    #     "name": name,
+    #     "Competition": Competition,
+    #     "club_value": club_value
+    # })
 
 
-    # df = pd.DataFrame(ClubValue, columns=[
-    #                   'ranking', 'club image', 'club', 'league image', 'league', 'value(억)'])
-    df.to_csv('club_trasfermarket.csv', index=False, encoding='utf-8')
+    # # df = pd.DataFrame(ClubValue, columns=[
+    # #                   'ranking', 'club image', 'club', 'league image', 'league', 'value(억)'])
+    # df.to_csv('club_trasfermarket.csv', index=False, encoding='utf-8')
 
 
     return ClubValue
@@ -100,7 +94,7 @@ def getClubValue():
 club = getClubValue()
 # print("dididi ",club)
 def addNewItems(clubValues):
-    last_inserted_items=ClubData.objects.last()
+    last_inserted_items=ClubValue.objects.last()
     if last_inserted_items is None:
         last_inserted_specific_id=""
     else:
@@ -108,7 +102,7 @@ def addNewItems(clubValues):
         # last_inserted_ranking=last_inserted_items[0]
 
     addItems=[]
-    print(ClubData)
+    print(ClubValue)
     for item in clubValues:
       
         if item['specific_id']==last_inserted_specific_id:
@@ -121,14 +115,13 @@ def addNewItems(clubValues):
     for item in addItems:
         print("new item added!" + item['name'])
         print(item)
-        ClubData(
+        ClubValue(
             specific_id=item['specific_id'],
             ranking= item['ranking'],
             club_image= item['club_image'],
             name= item['name'],
-            Competition_image= item['Competition_image'],
             Competition= item['Competition'],
-            club_value= item['club_value']
+            value= item['club_value']
         ).save()
     
     return addItems

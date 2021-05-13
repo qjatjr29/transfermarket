@@ -17,6 +17,7 @@ from crawled_data.models import Ligue1ClubStatistics
 from crawled_data.models import LaligaClubStatistics
 from crawled_data.models import SerieAClubStatistics
 from crawled_data.models import BundesligaClubStatistics
+from crawled_data.models import ClubStatistics
 
 
 
@@ -123,6 +124,26 @@ urls=[
 # print(getClubStats(_url))
 # NgetClubStatistics(_url,3)
 # NgetClubStatistics(_url,3)
+
+def addClubStat(clubstats):
+    for item in clubstats:
+      print("new item added!" + item['name'])
+      print(item)
+      ClubStatistics(
+            League=league,
+            specific_id=item['specific_id'],
+            ranking= item['ranking'],
+            state=item['state'],
+            name= item['name'],
+            play= item['play'],
+            win= item['win'],
+            draw= item['draw'],
+            lose= item['lose'],
+            gf= item['gf'],
+            ga=item['ga'],
+            gd= item['gd'],
+            pts= item['pts']
+        ).save()  
 
 def addPremierClub(clubstats):
     last_inserted_items=PremierClubStatistics.objects.last()
@@ -299,18 +320,6 @@ def addLigue1Club(clubstats):
     
     return addItems
 
-# for i in range(0,5):
-#     clubstats=getClubStats(urls[i])
-#     if i==0:
-#         addPremierClub(clubstats)
-#     elif i==1:
-#         addLaLigaClub(clubstats)
-#     elif i==2:
-#         addBundesLigaClub(clubstats)
-#     elif i==3:
-#         addSerieAClub(clubstats)
-#     elif i==4:
-#         addLigue1Club(clubstats)
 
 
 for i in range(0,5):
@@ -354,8 +363,19 @@ for i in range(0,5):
     # print(len(df['name']))
     size=len(df['specific_id'])
     stat=[]
+    if i==0 :
+        league="premier"
+    elif i==1 :
+        league="laliga"
+    elif i==2:
+        league="bundesliga"
+    elif i==3:
+        league="seriea"
+    elif i==4:
+        league="ligue1"
     for j in range(0,size):
         addStat={
+            'League':league,
             'specific_id':df['specific_id'][j],
             'ranking':df['ranking'][j],
             'name':df['name'][j],
@@ -371,18 +391,19 @@ for i in range(0,5):
         }
         stat.append(addStat)
         # print(df['name'][i])
-
+   
     # print(stat)
     time.sleep(5)
-    print("i" , i)
-    if i==0 :
-        addPremierClub(stat)
-    elif i==1 :
-        addLaLigaClub(stat)
-    elif i==2:
-        addBundesLigaClub(stat)
-    elif i==3:
-        addSerieAClub(stat)
-    elif i==4:
-        addLigue1Club(stat)
-    print(df)
+    addClubStat(stat)
+    # print("i" , i)
+    # if i==0 :
+    #     addPremierClub(stat)
+    # elif i==1 :
+    #     addLaLigaClub(stat)
+    # elif i==2:
+    #     addBundesLigaClub(stat)
+    # elif i==3:
+    #     addSerieAClub(stat)
+    # elif i==4:
+    #     addLigue1Club(stat)
+    # print(df)
