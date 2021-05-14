@@ -24,16 +24,10 @@ export const bundesLigaPlayerStats = () => API.get("/Stats/bundesliga");
 export const SerieAPlayerStats = () => API.get("/Stats/seriea");
 export const Ligue1PlayerStats = () => API.get("/Stats/ligue1");
 
-// export const laLigaClubStats = () => API.get("/ClubValue")
 
+//Search
+export const SearchPlayerStats = (name) => API.get(`/Stats/Search/${name}`);
+export const SearchClubStats = (name) => API.get(`/ClubStats/Search/${name}`);
+export const SearchPlayerValue = (name) => API.get(`Value/search/${name}`);
+export const SearchClubValue = (name) => API.get(`ClubValue/search/${name}`);
 
-
-
-
-// export const premierClubstatCreate = ((name, position, age) =>
-//     API.post("/api/SearchTerm", {
-//         name: name,
-//         position: position,
-//         age: age
-//     })
-// );

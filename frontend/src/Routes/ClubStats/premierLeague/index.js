@@ -60,15 +60,7 @@ const LigueImage = styled.img`
 const SectionHr = styled.hr`
     margin-top:15px;
 `;
-const ValueContent = styled.div`
-    height: 150px;
-    display: grid;
-    gap: 5px;
-    align-items: center;
-    grid-auto-flow: column;
-    grid-auto-columns: 8%;
-    overflow-x: auto;
-`;
+
 
 const SLink = styled(Link)`
 `;

@@ -8,4 +8,6 @@ urlpatterns = [
     # path('Value',views.PlayerValue.as_view()),
     path('Value/<str:_position>',views.Player_Value.as_view()),
     path('ClubValue',views.Club_Value.as_view()),
+    path('ClubValue/search/<str:name>',views.ClubValueSearch.as_view()),
+    path('Value/search/<str:name>',views.PlayerValueSearch.as_view()),
 ]

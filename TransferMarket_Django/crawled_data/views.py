@@ -44,3 +44,32 @@ class Player_Statistics(generics.ListCreateAPIView):
         return JsonResponse(list(data),safe=False)
 
 
+
+# Search
+
+class PlayerValueSearch(generics.ListCreateAPIView):
+    # serializer_class=ValueSerializer    
+    def get(self,request,name):
+        data=PlayerValue.objects.filter(name__icontains=name).values()
+        # return HttpResponse(position_data)
+        return JsonResponse(list(data),safe=False)
+# 안되나..
+class ClubValueSearch(generics.ListCreateAPIView):
+    # serializer_class=ValueSerializer
+    # queryset=ClubValue.objects.all()
+    def get(self,request,name):
+        data=ClubValue.objects.filter(name__icontains=name).values()
+        # return HttpResponse(position_data)
+        return JsonResponse(list(data),safe=False)
+class PlayerStatisticsSearch(generics.ListCreateAPIView):
+    # serializer_class=ValueSerializer    
+    def get(self,request,name):
+        data=PlayerStatistics.objects.filter(name__icontains=name).values()
+        # return HttpResponse(position_data)
+        return JsonResponse(list(data),safe=False)
+class ClubStatisticsSearch(generics.ListCreateAPIView):
+    # serializer_class=ValueSerializer    
+    def get(self,request,name):
+        data=ClubStatistics.objects.filter(name__icontains=name).values()
+        # return HttpResponse(position_data)
+        return JsonResponse(list(data),safe=False)
