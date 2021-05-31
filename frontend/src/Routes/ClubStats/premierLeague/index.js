@@ -9,7 +9,7 @@ import BundesLigaImg from '../../../assets/bundesLiga.PNG';
 import SerieAImg from '../../../assets/serieA.PNG';
 import Ligue1Img from '../../../assets/ligue1.PNG';
 import { Link } from "react-router-dom"
-import { premierClubStats } from '../../../Api/api';
+import { premierClubStats, TestClubStat } from '../../../Api/api';
 
 
 const Container = styled.div`
@@ -77,7 +77,7 @@ const useClubStats = () => {
         setLoading(true);
         try {
             const premierClubs = await premierClubStats();
-
+            // const premierClubs = await TestClubStat();
             console.log(premierClubs.data);
             setpremierClubs(premierClubs.data);
             // let res = await fetch('http://127.0.0.1:8000/premierClub/');

@@ -59,29 +59,6 @@ const useValue = () => {
     const loadValue = async () => {
         setLoading(true);
         try {
-            // let res = await fetch('http://127.0.0.1:8000/playerValue/');
-            // const playerValues = await res.json();
-            // setPlayerValues(playerValues);
-
-            // res = await fetch('http://127.0.0.1:8000/forwardValue/');
-            // const fowardValues = await res.json();
-            // setFowardValues(fowardValues);
-
-            // res = await fetch('http://127.0.0.1:8000/clubValue/')
-            // const clubValues = await res.json();
-            // setClubValues(clubValues);
-
-            // res = await fetch('http://127.0.0.1:8000/midfieldValue/')
-            // const midfielderValues = await res.json();
-            // setMidfielderValues(midfielderValues);
-
-            // res = await fetch('http://127.0.0.1:8000/defenderValue/')
-            // const defenderValues = await res.json();
-            // setDefenderValues(defenderValues);
-
-            // res = await fetch('http://127.0.0.1:8000/goalKeeperValue/')
-            // const goalkeeperValues = await res.json();
-            // setGoalkeeperValues(goalkeeperValues);
 
             const playerValues = await AllValueList();
             const fowardValues = await ForwardValueList();

@@ -115,57 +115,13 @@ const SearhResult = () => {
             </Form>
             {loading ? <Loader /> :
                 <>
-                    {SplayerValue && SplayerValue.length > 0 && (
-                        <Section title="PlayerValue">
-                            {SplayerValue.map(player => (
-                                <SearchValueSection
-                                    key={player.specific_id}
-                                    ranking={player.ranking}
-                                    name={player.name}
-                                    image={player.player_image}
-                                    value={player.value}
-                                    position={player.position}
-                                    _type={player._position}
-                                />
-                            ))}
-                        </Section>
-                    )}
-
-                    {SclubValue && SclubValue.length > 0 && (
-                        <Section title="ClubValue">
-                            {SclubValue.map(club => (
-                                <SearchValueSection
-                                    key={club.specific_id}
-                                    ranking={club.ranking}
-                                    name={club.name}
-                                    image={club.club_image}
-                                    value={club.value}
-                                    Competition={club.Competition}
-                                />
-                            ))}
-                        </Section>
-                    )}
 
                     <Content>
                         {SplayerStat && SplayerStat.length > 0 && (
                             <Item>
                                 <SectionTitle>Plyer Statistics</SectionTitle>
                                 <Table>
-                                    {/* <thead>
-                                        <tr>
-                                            <td>League</td>
-                                            <td>Name / Club</td>
-                                            <td>Age</td>
-                                            <td>Position</td>
-                                            <td>Games</td>
-                                            <td>Goals</td>
-                                            <td>Assists</td>
-                                            <td>SpG</td>
-                                            <td>PS</td>
-                                            <td>MotMPS</td>
-                                            <td>Rating</td>
-                                        </tr>
-                                    </thead> */}
+
                                     <tboby>
                                         <tr>
                                             <td>League</td>
@@ -205,22 +161,7 @@ const SearhResult = () => {
                             <Item>
                                 <SectionTitle>Club Statistics</SectionTitle>
                                 <Table>
-                                    {/* <thead>
-                                        <tr>
-                                            <td>League</td>
-                                            <td>Ranking</td>
-                                            <td>Club</td>
-                                            <td>P</td>
-                                            <td>W</td>
-                                            <td>D</td>
-                                            <td>L</td>
-                                            <td>GF</td>
-                                            <td>GA</td>
-                                            <td>GD</td>
-                                            <td>Pts</td>
-                                            <td>State</td>
-                                        </tr>
-                                    </thead> */}
+
                                     <tboby>
                                         <tr>
                                             <td>League</td>
@@ -259,99 +200,39 @@ const SearhResult = () => {
                             </Item>
                         )}
                     </Content>
+                    {SplayerValue && SplayerValue.length > 0 && (
+                        <Section title="PlayerValue">
+                            {SplayerValue.map(player => (
+                                <SearchValueSection
+                                    key={player.specific_id}
+                                    ranking={player.ranking}
+                                    name={player.name}
+                                    image={player.player_image}
+                                    value={player.value}
+                                    position={player.position}
+                                    _type={player._position}
+                                />
+                            ))}
+                        </Section>
+                    )}
 
-
-
+                    {SclubValue && SclubValue.length > 0 && (
+                        <Section title="ClubValue">
+                            {SclubValue.map(club => (
+                                <SearchValueSection
+                                    key={club.specific_id}
+                                    ranking={club.ranking}
+                                    name={club.name}
+                                    image={club.club_image}
+                                    value={club.value}
+                                    Competition={club.Competition}
+                                />
+                            ))}
+                        </Section>
+                    )}
                 </>}
         </Container>
     );
-
-    // ) : (
-    //     <Container>
-    //         <Helmet>
-    //             <title>Search</title>
-    //         </Helmet>
-    //         <Form onSubmit={handleSubmit}>
-    //             <Input placeholder="Search Players or Clubs..." value={searchTerm} onChange={updateTerm}></Input>
-    //         </Form>
-    //         {loading ? <Loader /> :
-    //             <>
-    //                 {SplayerValue && (
-    //                     <Section title="PlayerValue">
-    //                         {SplayerValue.map(player => (
-    //                             <SearchValueSection
-    //                                 key={player.specific_id}
-    //                                 ranking={player.ranking}
-    //                                 name={player.name}
-    //                                 image={player.player_image}
-    //                                 value={player.value}
-    //                                 position={player.position}
-    //                                 _type={player._position}
-    //                             />
-    //                         ))}
-    //                     </Section>
-    //                 )}
-
-    //                 {SclubValue && (
-    //                     <Section title="ClubValue">
-    //                         {SclubValue.map(club => (
-    //                             <SearchValueSection
-    //                                 key={club.specific_id}
-    //                                 ranking={club.ranking}
-    //                                 name={club.name}
-    //                                 image={club.club_image}
-    //                                 value={club.value}
-    //                                 Competition={club.Competition}
-    //                             />
-    //                         ))}
-    //                     </Section>
-    //                 )}
-
-    //                 {SplayerStat && (
-    //                     <Table>
-    //                         <thead>
-    //                             <tr>
-    //                                 <td>League</td>
-    //                                 <td>Ranking</td>
-    //                                 <td>Name / Club</td>
-    //                                 <td>Age</td>
-    //                                 <td>Position</td>
-    //                                 <td>Games</td>
-    //                                 <td>Goals</td>
-    //                                 <td>Assists</td>
-    //                                 <td>SpG</td>
-    //                                 <td>PS</td>
-    //                                 <td>MotMPS</td>
-    //                                 <td>Rating</td>
-    //                             </tr>
-    //                         </thead>
-    //                         <tboby>
-    //                             {SplayerStat.map(player => (
-    //                                 <StatSearch
-    //                                     League={player.League}
-    //                                     key={player.specific_id}
-    //                                     ranking={player.specific_id}
-    //                                     name={player.name}
-    //                                     age={player.age}
-    //                                     position={player.position}
-    //                                     games={player.Games}
-    //                                     goals={player.Goals}
-    //                                     assists={player.Assists}
-    //                                     SpG={player.SpG}
-    //                                     Ps={player.PS}
-    //                                     MotM={player.MotM}
-    //                                     Rating={player.Rating}
-    //                                 />
-    //                             ))}
-    //                         </tboby>
-    //                     </Table>
-    //                 )}
-    //             </>
-    //         }
-
-    //     </Container>
-
-    // ));
 }
 
 export default SearhResult;
