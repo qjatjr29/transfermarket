@@ -16,7 +16,7 @@ import { Link } from "react-router-dom"
 import Section from "Components/Section";
 import SearchValueSection from "Components/SearchValueSection";
 import StatSearch from "Components/SearchStatSection";
-
+import TestValue from "Components/SearchValue";
 const Content = styled.div`
     display:flex;
     flex-direction:column;
@@ -70,7 +70,7 @@ const useSearch = () => {
             const SplayerStat = await SearchPlayerStats(searchTerm);
             const SclubStat = await SearchClubStats(searchTerm);
 
-            console.log(SplayerValue.data);
+            // console.log(SplayerValue.data);
             setSplayerValue(SplayerValue.data);
             setSclubValue(SclubValue.data);
             setSplayerStat(SplayerStat.data);
@@ -121,7 +121,6 @@ const SearhResult = () => {
                             <Item>
                                 <SectionTitle>Plyer Statistics</SectionTitle>
                                 <Table>
-
                                     <tboby>
                                         <tr>
                                             <td>League</td>
@@ -201,34 +200,94 @@ const SearhResult = () => {
                         )}
                     </Content>
                     {SplayerValue && SplayerValue.length > 0 && (
-                        <Section title="PlayerValue">
-                            {SplayerValue.map(player => (
-                                <SearchValueSection
-                                    key={player.specific_id}
-                                    ranking={player.ranking}
-                                    name={player.name}
-                                    image={player.player_image}
-                                    value={player.value}
-                                    position={player.position}
-                                    _type={player._position}
-                                />
-                            ))}
-                        </Section>
+                        <Item>
+                            <SectionTitle>Player Values</SectionTitle>
+                            <Table>
+                                <tboby>
+                                    <tr>
+                                        <td>Type</td>
+                                        <td>Ranking</td>
+                                        <td>Name</td>
+                                        <td>position</td>
+                                        <td>Value</td>
+                                    </tr>
+                                    {SplayerValue.map(player => (
+                                        <TestValue
+                                            key={player.specific_id}
+                                            ranking={player.ranking}
+                                            name={player.name}
+                                            image={player.player_image}
+                                            value={player.value}
+                                            position={player.position}
+                                            _type={player._position}
+                                            type="player"
+                                        />
+                                    ))}
+                                </tboby>
+                            </Table>
+                        </Item>
+
+                        // grid - image  있는 버전
+                        // <>
+                        //     <SectionTitle>ClubValue</SectionTitle>
+                        //     <Section >
+                        //         {SplayerValue.map(player => (
+                        //             <SearchValueSection
+                        //                 key={player.specific_id}
+                        //                 ranking={player.ranking}
+                        //                 name={player.name}
+                        //                 image={player.player_image}
+                        //                 value={player.value}
+                        //                 position={player.position}
+                        //                 _type={player._position}
+                        //             />
+                        //         ))}
+                        //     </Section>
+                        // </>
                     )}
 
                     {SclubValue && SclubValue.length > 0 && (
-                        <Section title="ClubValue">
-                            {SclubValue.map(club => (
-                                <SearchValueSection
-                                    key={club.specific_id}
-                                    ranking={club.ranking}
-                                    name={club.name}
-                                    image={club.club_image}
-                                    value={club.value}
-                                    Competition={club.Competition}
-                                />
-                            ))}
-                        </Section>
+                        <Item>
+                            <SectionTitle>Club Values</SectionTitle>
+                            <Table>
+                                <tboby>
+                                    <tr>
+                                        <td>Ranking</td>
+                                        <td>Name</td>
+                                        <td>League</td>
+                                        <td>Value</td>
+                                    </tr>
+                                    {SclubValue.map(club => (
+                                        <TestValue
+                                            key={club.specific_id}
+                                            ranking={club.ranking}
+                                            name={club.name}
+                                            image={club.club_image}
+                                            value={club.value}
+                                            Competition={club.Competition}
+                                            type="club"
+                                        />
+                                    ))}
+                                </tboby>
+                            </Table>
+                        </Item>
+
+
+                        // <>
+                        //     <SectionTitle>ClubValue</SectionTitle>
+                        //     <Section >
+                        //         {SclubValue.map(club => (
+                        //             <SearchValueSection
+                        //                 key={club.specific_id}
+                        //                 ranking={club.ranking}
+                        //                 name={club.name}
+                        //                 image={club.club_image}
+                        //                 value={club.value}
+                        //                 Competition={club.Competition}
+                        //             />
+                        //         ))}
+                        //     </Section>
+                        // </>
                     )}
                 </>}
         </Container>

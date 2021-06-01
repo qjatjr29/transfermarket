@@ -19,7 +19,7 @@ const Content = styled.div`
     height:100%;
 `;
 const Item = styled.div`
-    margin-bottom:30px;
+    margin-bottom:50px;
 `;
 
 
@@ -32,7 +32,7 @@ const DivideDiv = styled.div`
 `;
 const SectionTitle = styled.span`
     margin-top:20px;
-    font-size:23px;
+    font-size:28px;
     font-weight:600;
 `;
 const SectionHr = styled.hr`
@@ -94,18 +94,18 @@ const Value = () => {
         loading ? (
             <Loader>
                 <Helmet>
-                    <title>Most Valuable Players</title>
+                    <title>Most Valuable Players / Clubs</title>
                 </Helmet>
             </Loader>
         ) : (
             <Container>
                 <Helmet>
-                    <title>Most Valuable Players</title>
+                    <title>Most Valuable Players / Clubs</title>
                 </Helmet>
                 <Content>
                     {playerValues && playerValues.length > 0 && (
                         <Item>
-                            <SectionTitle>Most Valuable Players</SectionTitle>
+                            <SectionTitle>Most Valuable Players (ALL Position)</SectionTitle>
                             <SectionHr></SectionHr>
                             <ValueContent>
                                 {playerValues.map(player => (
