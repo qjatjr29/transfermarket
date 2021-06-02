@@ -339,3 +339,37 @@ class ClubStatisticsSearch(generics.ListCreateAPIView):
             print("Failed")
         
         return JsonResponse(list(results),safe=False)
+
+
+class SonStatistics(generics.ListCreateAPIView):
+
+    def get(self,request):
+        results=[]
+        try:
+            cursor=connection.cursor()
+            strSql="SELECT * FROM crawled_data_playerstatistics WHERE name LIKE 'Son Heung-Min%';"
+            cursor.execute(strSql)
+            datas=cursor.fetchall()
+            for data in datas:
+                item={
+                    'id':data[0],
+                    'specific_id':data[1],
+                    'League':data[2],
+                    'name':data[3],
+                    'age':data[4],
+                    'position':data[5],
+                    'Games':data[6],
+                    'Goals':data[7],
+                    'Assists':data[8],
+                    'MotM':data[11],
+                    'Rating':data[12],
+                }
+                results.append(item);
+
+            connection.commit()
+            connection.close()
+        except:
+            connection.rollback()
+            print("Failed")
+        
+        return JsonResponse(results,safe=False)

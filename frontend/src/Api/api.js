@@ -31,5 +31,9 @@ export const SearchClubStats = (name) => API.get(`/ClubStats/Search/${name}`);
 export const SearchPlayerValue = (name) => API.get(`Value/search/${name}`);
 export const SearchClubValue = (name) => API.get(`ClubValue/search/${name}`);
 
+// Home 
+export const SonStatistic = () => API.get("/Son");
+
+
 export const TestClubStat = () => API.get("ClubStats/Test/");
 // path('ClubStats/Test/',views.TestClubStat.as_view()),

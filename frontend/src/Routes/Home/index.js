@@ -11,6 +11,8 @@ import CoverImage from "../../assets/mainImage.jpg";
 import basketballImage from "../../assets/basketball.jpg";
 import PlayerImage from "../../assets/playerResult.PNG";
 import ClubImage from "../../assets/clubResult.PNG";
+import { SonStatistic } from "../../Api/api";
+
 
 const Container = styled.div`
     position: absolute;
@@ -74,7 +76,37 @@ const MainText = styled.p`
     margin: 30px 0;
     line-height: 1.5;
 `;
-
+const SubText = styled.p`
+    font-family: "Noto Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 8px 0;
+    line-height: 1.5;
+`;
+const Title = styled.div`
+  font-family: 'Jua', sans-serif;
+  font-size: 5rem;
+  margin-bottom: 1.2rem;
+  opacity: 0.8;
+`;
+const Main = styled.div`
+    
+    padding: 0px 25px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 800px;
+    flex-direction: column;
+`;
+const Description = styled.div`
+  width: 100%;
+  z-index: 3;
+  color: white;
+  opacity: 0.6;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  margin-bottom: 30px;
+`;
 
 const First = styled.div`
     display: flex;
@@ -83,7 +115,7 @@ const First = styled.div`
     width: 100%;
     height: 400px;
     flex-direction: column;
-
+    font-family: 'Jua', sans-serif;
     & ${Wrap} {
         flex-direction: column;
     }
@@ -94,9 +126,17 @@ const First = styled.div`
         ${MainImg} {
             width: 250px;
         }
-     
+        ${SubText} {
+            font-size: 20px;
+        }
         ${MainText} {
             font-size: 26px;
+        }
+        ${Title} {
+            font-size: 26px;
+        }
+        ${Description} {
+            font-size: 20px;
         }
     }
 
@@ -105,9 +145,17 @@ const First = styled.div`
         ${MainImg} {
             width: 350px;
         }
-      
+        ${SubText} {
+            font-size: 25px;
+        }
         ${MainText} {
             font-size: 38px;
+        }
+        ${Title} {
+            font-size: 38px;
+        }
+        ${Description} {
+            font-size: 26px;
         }
     }
 
@@ -116,8 +164,17 @@ const First = styled.div`
         ${MainImg} {
             width: 450px;
         }
+        ${SubText} {
+            font-size: 28px;
+        }
         ${MainText} {
             font-size: 50px;
+        }
+        ${Title} {
+            font-size: 45px;
+        }
+        ${Description} {
+            font-size: 30px;
         }
     }
 `;
@@ -248,8 +305,36 @@ const RotateImage = styled.div`
     }
 `;
 
+const LoadData = () => {
+    const [sonData, setSondata] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const LoadDatas = async () => {
+        setLoading(true);
+        try {
+            const SonStat = await SonStatistic();
+            console.log(SonStat.data);
+            setSondata(SonStat.data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        LoadDatas();
+    }, []);
+
+
+    return { loading, sonData }
+}
+
 
 const Home = () => {
+    const { loading, sonData } = LoadData();
+    // console.log(sonData);
     return (
         <Container>
             <Helmet>
@@ -262,20 +347,39 @@ const Home = () => {
             // bgImage="https://resources.premierleague.com/photos/2020/07/10/8bfb6be4-5e23-4ce2-970b-e85ced220cc0/GettyImages-955249480.jpg?width=2000height=800"
             >
             </Cover>
-            <First>
-                <Wrap>
-                    {/* <MainImg>
-                        <img src={CoverImage} />
-                    </MainImg> */}
-                    <MainText>
+            {loading ? <Loader /> :
+                <>
+                    {sonData && sonData.length > 0 &&
+                        <First>
+                            <Title>{sonData[0].name}</Title>
+                            <Description>리그 : {sonData[0].League}</Description>
+                            <Description>나이 : {sonData[0].age}</Description>
+                            <Description>경기수 : {sonData[0].Games}</Description>
+                            <Description>골 : {sonData[0].Goals}</Description>
+                            <Description>어시스트 : {sonData[0].Assists}</Description>
+                            <Description>평점 : {sonData[0].Rating}</Description>
+                        </First>
+                    }
+                </>
+            }
 
-                    </MainText>
+
+            {/* <First>
+
+                <Wrap>
+                    <MainText>{sonData[0].name}</MainText>
+
+                    <SubText>{sonData[0].League}</SubText>
+                    <SubText>{sonData[0].age}</SubText>
+                    <SubText>{sonData[0].Games}</SubText>
+                    <SubText>{sonData[0].Goals}</SubText>
+                    <SubText>{sonData[0].Assists}</SubText>
                     <MainText>
 
                     </MainText>
                 </Wrap>
-            </First>
-            <Content>
+            </First> */}
+            {/* <Content>
                 <Wrap>
                     <MainText>
                         Statistics<br /><br />
@@ -299,7 +403,7 @@ const Home = () => {
                     </MainText>
 
                 </Wrap>
-            </Content>
+            </Content> */}
         </Container>
     )
 
